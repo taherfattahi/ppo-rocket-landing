@@ -7,6 +7,52 @@ https://github.com/user-attachments/assets/2bc71416-0043-4e8d-8f00-cd0d85a834ec
 ![RewardsChart](images/rewards-timesteps.png)
 
 
+### Actions
+
+The rocket can take different actions, each defined by a thrust force and nozzle angular velocity. The available actions are:
+
+1. **Thrust Levels**: Controls the rocket’s thrust, with options:
+   - **0.2 × g**
+   - **1.0 × g**
+   - **2.0 × g**
+   
+2. **Nozzle Angular Velocities**: Controls the rotation of the rocket nozzle, with options:
+   - **0** (No rotation)
+   - **+30°/s**
+   - **-30°/s**
+
+These combinations result in a set of **9 actions**:
+
+| Action | Thrust | Nozzle Angular Velocity |
+|--------|--------|-------------------------|
+| 0      | 0.2 g  | 0                       |
+| 1      | 0.2 g  | +30°/s                  |
+| 2      | 0.2 g  | -30°/s                  |
+| 3      | 1.0 g  | 0                       |
+| 4      | 1.0 g  | +30°/s                  |
+| 5      | 1.0 g  | -30°/s                  |
+| 6      | 2.0 g  | 0                       |
+| 7      | 2.0 g  | +30°/s                  |
+| 8      | 2.0 g  | -30°/s                  |
+
+---
+
+### States
+
+The state of the rocket environment is represented by an **8-dimensional vector**, capturing essential details for controlling the rocket. Each component of the state vector is normalized:
+
+- **x**: Horizontal position (m)
+- **y**: Vertical position (m)
+- **vx**: Horizontal velocity (m/s)
+- **vy**: Vertical velocity (m/s)
+- **θ (theta)**: Rocket’s angle relative to the vertical (radians)
+- **vθ (vtheta)**: Angular velocity of the rocket (radians/s)
+- **t**: Simulation time (steps)
+- **φ (phi)**: Nozzle angle (radians)
+
+These states provide the necessary information for the agent to understand the rocket's position, orientation, and dynamics, which are essential for executing successful hovering or landing maneuvers.
+
+--- 
 ### Table of Contents
 
 - [Proximal Policy Optimization (PPO) for Rocket Landing](#proximal-policy-optimization-ppo-for-rocket-landing)
