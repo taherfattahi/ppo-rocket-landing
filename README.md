@@ -2,6 +2,7 @@
 
 Proximal Policy Optimization (PPO) algorithm using PyTorch to train an agent for a rocket landing task in a custom environment.
 
+https://github.com/user-attachments/assets/2bc71416-0043-4e8d-8f00-cd0d85a834ec
 
 ![RewardsChart](images/rewards-timesteps.png)
 
