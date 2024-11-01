@@ -53,29 +53,6 @@ The state of the rocket environment is represented by an **8-dimensional vector*
 These states provide the necessary information for the agent to understand the rocket's position, orientation, and dynamics, which are essential for executing successful hovering or landing maneuvers.
 
 --- 
-### Table of Contents
-
-- [Proximal Policy Optimization (PPO) for Rocket Landing](#proximal-policy-optimization-ppo-for-rocket-landing)
-  - [Features](#features)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Training](#training)
-    - [Testing](#testing)
-  - [Project Structure](#project-structure)
-  - [Mathematical Background](#mathematical-background)
-    - [Proximal Policy Optimization (PPO)](#proximal-policy-optimization-ppo)
-    - [Neural Network Architecture](#neural-network-architecture)
-      - [Actor Network](#actor-network)
-      - [Critic Network](#critic-network)
-    - [Action Selection](#action-selection)
-    - [Gradient Computation](#gradient-computation)
-  - [Hyperparameters](#hyperparameters)
-  - [Results](#results)
-  - [Resources](#resources)
-  - [Contact](#contact)
-
----
 
 ## Features
 
