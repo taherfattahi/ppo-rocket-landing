@@ -1,6 +1,6 @@
 # Proximal Policy Optimization (PPO) for Rocket Landing
 
-Proximal Policy Optimization (PPO) algorithm using PyTorch to train an agent for a rocket landing task in a custom environment.
+The goal is to train a reinforcement learning agent to control a rocket to either hover or land safely using the PPO algorithm. The environment simulates physics for the rocket, and the agent learns to make decisions based on the state observations to achieve the task.
 
 https://github.com/user-attachments/assets/2bc71416-0043-4e8d-8f00-cd0d85a834ec
 
@@ -56,9 +56,6 @@ These states provide the necessary information for the agent to understand the r
 ### Table of Contents
 
 - [Proximal Policy Optimization (PPO) for Rocket Landing](#proximal-policy-optimization-ppo-for-rocket-landing)
-      - [Rocket Landing Reward](#rocket-landing-reward)
-    - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
   - [Features](#features)
   - [Requirements](#requirements)
   - [Installation](#installation)
@@ -77,12 +74,6 @@ These states provide the necessary information for the agent to understand the r
   - [Results](#results)
   - [Resources](#resources)
   - [Contact](#contact)
-
----
-
-## Overview
-
-The goal is to train a reinforcement learning agent to control a rocket to either hover or land safely using the PPO algorithm. The environment simulates physics for the rocket, and the agent learns to make decisions based on the state observations to achieve the task.
 
 ---
 
