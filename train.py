@@ -18,7 +18,7 @@ def train():
     env_name = "RocketLanding"
     task = 'landing'  # 'hover' or 'landing'
 
-    render = False
+    render = True
 
     has_continuous_action_space = False  # Discrete action space for Rocket
 
