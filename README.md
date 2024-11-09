@@ -90,22 +90,26 @@ These states provide the necessary information for the agent to understand the r
    source venv/bin/activate  # On Windows use venv\Scripts\activate
    ```
 
-3. **Install Dependencies**
+3. [**Install Dependencies**](requirements.txt)
    
    ```bash
-   pip install torch numpy matplotlib
+   pip install -r requirements.txt
    ```
 
-4. **Ensure CUDA Availability (Optional)**
+4. **Ensure GPU Availability (Optional)**
 
-   If you have a CUDA-compatible GPU and want to utilize it:
+   If you have a CUDA-compatible GPU or Apple Silicon Chip and want to utilize it:
 
    - Install the appropriate CUDA toolkit version compatible with your PyTorch installation.
-   - Verify CUDA availability in PyTorch:
-
+   - Verify GPU availability in PyTorch:
      ```python
-     import torch
-     torch.cuda.is_available()
+      import torch
+      if torch.cuda.is_available():
+         device = torch.device("cuda:0")
+         print("Device set to:", torch.cuda.get_device_name(device))
+      elif torch.backends.mps.is_available():
+         device = torch.device("mps")
+         print("Device set to: MPS (Apple Silicon)")
      ```
 
 ---
