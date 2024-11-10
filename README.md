@@ -2,7 +2,7 @@
 
 The goal is to train a reinforcement learning agent to control a rocket to either hover or land safely using the PPO algorithm. The environment simulates physics for the rocket, and the agent learns to make decisions based on the state observations to achieve the task.
 
-https://github.com/user-attachments/assets/2bc71416-0043-4e8d-8f00-cd0d85a834ec
+https://github.com/user-attachments/assets/d1977412-2de8-49c3-b0d1-f602dc28bb61
 
 ![RewardsChart](images/rewards-timesteps.png)
 
