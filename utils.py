@@ -6,41 +6,6 @@ import matplotlib as plt
 import torch 
 import os
 import json
-from datetime import datetime
-
-
-################ Training Management ####################
-def get_training_config():
-    """Get training configuration from user"""
-    config = {}
-    
-    print("\n====== Training Configuration ======")
-    
-    # Task and rocket selection
-    while True:
-        task = input("\nSelect task (hover/landing) [default: landing]: ").lower()
-        if task in ['', 'hover', 'landing']:
-            config['task'] = 'landing' if task == '' else task
-            break
-        print("Invalid choice. Please select 'hover' or 'landing'")
-    
-    while True:
-        rocket = input("\nSelect rocket type (falcon/starship) [default: starship]: ").lower()
-        if rocket in ['', 'falcon', 'starship']:
-            config['rocket_type'] = 'starship' if rocket == '' else rocket
-            break
-        print("Invalid choice. Please select 'falcon' or 'starship'")
-    
-    # Visualization preferences
-    config['render'] = input("\nEnable environment rendering? (y/n) [default: n]: ").lower() == 'y'
-    config['plot_realtime'] = input("Enable real-time plotting? (y/n) [default: y]: ").lower() != 'n'
-    config['save_plots'] = input("Save training plots? (y/n) [default: y]: ").lower() != 'n'
-    
-    # Training parameters
-    config['max_episodes'] = int(input("\nEnter maximum episodes [default: 1000]: ") or 1000)
-    config['save_freq'] = int(input("Save checkpoint frequency (episodes) [default: 100]: ") or 100)
-    
-    return config
 
 ################ Checkpoint Management ####################
 def find_checkpoints(directory, env_name):
@@ -88,64 +53,7 @@ def setup_logging(log_dir, env_name, run_num):
             return open(log_path, 'a'), True
     
     return open(log_path, 'w+'), False
-
-################ Plot Management ####################
-def setup_plotting(config):
-    """Setup plotting based on configuration"""
-    if not config['plot_realtime'] and not config['save_plots']:
-        return None, None
-    
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.set_xlabel('Episode')
-    ax.set_ylabel('Reward')
-    ax.set_title('Training Progress')
-    
-    if config['plot_realtime']:
-        plt.ion()
-        plt.show(block=False)
-    
-    return fig, ax
-
-def update_plots(fig, ax, episode_rewards, window_size, config, save_dir=None):
-    """Update and optionally save plots"""
-    if fig is None or ax is None:
-        return
-    
-    if len(episode_rewards) >= window_size:
-        moving_avg = np.convolve(episode_rewards, np.ones(window_size)/window_size, mode='valid')
-        moving_std = np.array([np.std(episode_rewards[i-window_size+1:i+1]) 
-                             for i in range(window_size-1, len(episode_rewards))])
-        episodes = np.arange(window_size-1, len(episode_rewards))
-        
-        ax.clear()
-        ax.plot(episodes, moving_avg, label='Moving Average')
-        ax.fill_between(episodes, moving_avg-moving_std, moving_avg+moving_std, 
-                       alpha=0.2, label='Standard Deviation')
-        ax.set_xlabel('Episode')
-        ax.set_ylabel('Reward')
-        ax.set_title('Training Progress')
-        ax.legend()
-        
-        if config['plot_realtime']:
-            plt.draw()
-            plt.pause(0.01)
-        
-        if config['save_plots'] and save_dir:
-            plt.savefig(os.path.join(save_dir, f'training_progress_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'))
-            
 ################ Some helper functions... ####################
-
-def moving_avg(x, N=500):
-
-    if len(x) <= N:
-        return []
-
-    x_pad_left = x[0:N]
-    x_pad_right = x[-N:]
-    x_pad = x_pad_left[::-1] + x + x_pad_right[::-1]
-    y = np.convolve(x_pad, np.ones(N) / N, mode='same')
-    return y[N:-N]
-
 
 def load_bg_img(path_to_img, w, h):
     bg_img = cv2.imread(path_to_img, cv2.IMREAD_COLOR)
@@ -247,12 +155,6 @@ def create_pose_matrix(tx=0., ty=0., tz=0.,
                  * np.asmatrix(base_correction)
 
     return np.array(PoseMatrix)
-
-# Add these imports at the top of utils.py
-import os
-import json
-import matplotlib.pyplot as plt
-from datetime import datetime
 
 ################ Training Management ####################
 
