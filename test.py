@@ -5,6 +5,7 @@ import cv2
 import torch
 from PPO import PPO
 from rocket import Rocket
+import re
 
 def create_confetti_particles(num_particles=30):  # Reduced particles
     """Create confetti particles"""
@@ -111,13 +112,15 @@ def test():
     ppo_agent = PPO(state_dim, action_dim, lr_actor, lr_critic, gamma, 
                     K_epochs, eps_clip, has_continuous_action_space)
     
-    # Load pretrained model
-    checkpoint_path = os.path.join("PPO_preTrained", env_name, "PPO_RocketLanding_0_0.pth")
-    if not os.path.exists(checkpoint_path):
-        print(f"\nError: No checkpoint found at {checkpoint_path}")
+    checkpoint_dir = os.path.join("PPO_preTrained", env_name)
+    checkpoints = [f for f in os.listdir(checkpoint_dir) if re.match(r"PPO_RocketLanding_\d+_\d+\.pth", f)]
+    if not checkpoints:
+        print(f"\nError: No checkpoints found in {checkpoint_dir}")
         print("Please ensure you have trained the model first.")
         return
-        
+    checkpoints.sort(key=lambda x: [int(num) for num in re.findall(r'\d+', x)])
+    latest_checkpoint = checkpoints[-1]
+    checkpoint_path = os.path.join(checkpoint_dir, latest_checkpoint)
     print(f"\nLoading model from: {checkpoint_path}")
     try:
         ppo_agent.load(checkpoint_path)
@@ -156,7 +159,7 @@ def test():
                 
                 # Stricter landing conditions
                 if (reward > 500 and  # High reward
-                    abs(x_pos) < 20.0 and  # Close to center
+                    abs(x_pos) < 10.0 and  # Close to center
                     abs(vx) < 5.0 and abs(vy) < 5.0 and  # Low velocity
                     abs(theta) < 0.1):  # Nearly vertical
                     
