@@ -171,7 +171,6 @@ def test():
         test_running_reward += ep_reward
         print(f'Episode: {ep} \t\t Reward: {round(ep_reward, 2)}')
     
-    env.close()
     cv2.destroyAllWindows()
     
     print("============================================================================================")
